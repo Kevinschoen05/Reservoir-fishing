@@ -1,11 +1,10 @@
 <template>
   <ul>
-    <trips-item
-      v-for="trips in crotonTrips"
-      :key="trips.id"
-      :tripDate="trips.timestamp"
-      
-    ></trips-item>
+      <trips-item
+        v-for="trips in crotonTrips"
+        :key="trips.id"
+        :tripDate="trips.timestamp"
+      ></trips-item>
   </ul>
 </template>
 
@@ -19,6 +18,12 @@ export default {
     },
     crotonTrips() {
       return this.$store.getters["crotonTrips"];
+    },
+    muscootWeight() {
+      return this.$store.getters["muscootWeight"];
+    },
+    muscootTrips() {
+      return this.$store.getters["muscootTrips"];
     },
   },
 };

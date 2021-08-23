@@ -45,10 +45,10 @@ export default {
       return this.$store.getters['crotonTripsCounter']
     },
     muscootWeight(){
-      return this.$store.getters['muscootWeight']
+      return this.$store.getters['muscootWeight'].toFixed(2)
     },
     crotonWeight(){
-      return this.$store.getters['crotonWeight']
+      return this.$store.getters['crotonWeight'].toFixed(2)
     }
   },
 

@@ -27,7 +27,7 @@ export default {
         this.recordsList = records;
 
         context.commit('setRecordsList', records);
-        console.log(this.recordsList);
+        //console.log(this.recordsList);
       },
       
       

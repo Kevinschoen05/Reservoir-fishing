@@ -49,7 +49,7 @@ export default {
     },
     crotonWeight(){
       return this.$store.getters['crotonWeight'].toFixed(2)
-    }
+    }, 
   },
 
 };

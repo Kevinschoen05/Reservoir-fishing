@@ -1,21 +1,29 @@
 <template>
   <div v-if="this.reservoir === 'croton'">
-    <trips-table v-for="trips in crotonTripsList" :key="trips.timestamp">
-      <trips-item></trips-item>
-    </trips-table>
+    <trips-item
+      v-for="trips in crotonTripsList"
+      :key="trips.date"
+      :tripDate="trips.date"
+    >
+      <base-button>View Details</base-button>
+    </trips-item>
   </div>
   <div v-if="this.reservoir === 'muscoot'">
-    <trips-table v-for="trips in muscootTripsList" :key="trips.timestamp">
-      <trips-item v-for="trips in muscootTripsList['']" :key="trips.timestamp" :tripDate="trips.timestamp"></trips-item>
-    </trips-table>
+    <trips-item
+      v-for="trips in muscootTripsList"
+      :key="trips.date"
+      :tripDate="trips.date"
+    >
+      <base-button>View Details</base-button>
+    </trips-item>
   </div>
 </template>
 
 <script>
 import TripsItem from "../../trips/TripsItem.vue";
-import TripsTable from "../../trips/tripTable.vue";
+//import TripsTable from "../../trips/tripTable.vue";
 export default {
-  components: { TripsItem, TripsTable },
+  components: { TripsItem },
   props: ["reservoir"],
   data() {
     return {
@@ -35,7 +43,7 @@ export default {
     },
     muscootTrips() {
       return this.$store.getters["muscootTrips"];
-    }, 
+    },
   },
   methods: {
     groupCrotonRecordsByDate() {
@@ -49,7 +57,15 @@ export default {
         this.crotonTripsList = trips;
         return trips;
       }, {});
-      console.log(this.crotonTripsList);
+      const tripArrays = Object.keys(this.crotonTripsList).map((date) => {
+        return {
+          date,
+          records: this.crotonTripsList[date],
+        };
+      });
+      this.crotonTripsList = tripArrays;
+      console.log(tripArrays);
+      return tripArrays;
     },
     groupMuscootRecordsByDate() {
       const trips = this.muscootTrips;
@@ -62,7 +78,15 @@ export default {
         this.muscootTripsList = trips;
         return trips;
       }, {});
-      console.log(this.muscootTripsList);
+      const tripArrays = Object.keys(this.muscootTripsList).map((date) => {
+        return {
+          date,
+          records: this.muscootTripsList[date],
+        };
+      });
+      this.muscootTripsList = tripArrays;
+      console.log(tripArrays);
+      return tripArrays;
     },
   },
   created() {

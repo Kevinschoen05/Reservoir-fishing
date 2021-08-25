@@ -1,23 +1,19 @@
 <template>
-    <trips-table v-if="this.reservoir === 'croton'">
-      <trips-item
-        v-for="trips in crotonTripsList"
-        :key="trips.id"
-        :tripDate="trips[value].timestamp"
-      ></trips-item>
+  <div v-if="this.reservoir === 'croton'">
+    <trips-table v-for="trips in crotonTripsList" :key="trips.timestamp">
+      <trips-item></trips-item>
     </trips-table>
-    <trips-table v-if="this.reservoir === 'muscoot'">
-      <trips-item
-        v-for="dates in muscootTripsList"
-        :key="dates.id"
-        :tripDate="dates.value"
-      ></trips-item>
+  </div>
+  <div v-if="this.reservoir === 'muscoot'">
+    <trips-table v-for="trips in muscootTripsList" :key="trips.timestamp">
+      <trips-item v-for="trips in muscootTripsList['']" :key="trips.timestamp" :tripDate="trips.timestamp"></trips-item>
     </trips-table>
+  </div>
 </template>
 
 <script>
 import TripsItem from "../../trips/TripsItem.vue";
-import TripsTable from '../../trips/tripTable.vue'
+import TripsTable from "../../trips/tripTable.vue";
 export default {
   components: { TripsItem, TripsTable },
   props: ["reservoir"],
@@ -39,7 +35,7 @@ export default {
     },
     muscootTrips() {
       return this.$store.getters["muscootTrips"];
-    },
+    }, 
   },
   methods: {
     groupCrotonRecordsByDate() {
